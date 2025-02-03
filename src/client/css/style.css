@@ -1,0 +1,60 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+    text-align: center;
+}
+
+i.fa-arrow-left, i.fa-arrow-right {
+    color: #0D6EFD;
+    font-size: 2em;
+}   
+  
+.icon-element {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20em;
+}
+
+i.fa-heart {
+    color: rgb(212, 108, 108);
+}
+
+i.fa-star {
+    color: rgb(240, 227, 54);
+}
+
+i.fa-droplet {
+    color: rgb(90, 173, 206);
+}
+
+i.fa-tag {
+    color: #1f19425d;
+}
+
+
+#card-display .col-md-6 {
+    margin-bottom: 20px;
+}
+
+.profile {
+    width: 400px;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    box-shadow: 0 4px 12px 0;
+    border-radius: 5%;
+}
+
+.indented {
+    text-indent: 40px;;
+}
+
+.cover-letter {
+    
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>About</title>
+</head>
+<body>
+    <!-- Header -->
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills fs-5">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link active" aria-current="page">About</a></li>
+          <li class="nav-item"><a href="create.html" class="nav-link">Create</a></li>
+          <li class="nav-item"><a href="search.html" class="nav-link">Search</a></li>
+        </ul>
+      </header>
+      
+    <!-- Content -->
+    <div class="container">
+        <h1>About</h1>
+        <hr>
+
+        <!-- Profile Picture -->
+         <h2 style="display: flex; justify-content: center;">Connor</h2>
+        <img src="pictures/profile.JPG" alt="Profile Picture" class="profile" >
+        <br>
+
+        <!-- Cover Letter -->
+        <div class="cover-letter">
+            <p class="indented">
+                I'm currently attending Durham College and studying Computer Programming and Analysis. I'd love to see myself as a 
+                software developer in the future. I have
+                gained extensive experience in data analytics and problem-solving on a day-to-day basis. My
+                communication skills and teamwork experience has also grown immensely. I have spent my
+                whole life prioritizing communication skills, understanding that this is a key factor of working
+                with a large team. I also took numerous networking and security classes, which I had excelled
+                and shown a deep understanding in.
+            </p>
+            <p class="indented">
+                I have always wanted to feel like my work is helping the real-world and making a difference.
+                I love a good challenge; the idea of deep thinking and problem-solving day-to-day issues brings me joy.
+            </p>
+        </div>
+        <br>
+        <br>
+
+        <!-- Accordion -->
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Who am I?
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">My name is Connor Smith, and I'm a programmer. I'm from Ajax, Ontario and have attended Durham College.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  What is this website?
+                </button>
+              </h2>
+              <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">This website serves as an introduction to who I am. There is also a store built in where users may create, edit, and remove item from the bussiness.</div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+          <hr>
+          <p>© <span id="copyright"></span> Connor Smith, Inc</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/products/about.js"></script>
+</body>
+</html>

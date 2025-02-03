@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Search</title>
+</head>
+<body>
+    <!-- Header -->
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills fs-5">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="create.html" class="nav-link">Create</a></li>
+          <li class="nav-item"><a href="search.html" class="nav-link active" aria-current="page">Search</a></li>
+        </ul>
+      </header>
+      
+    <!-- Content -->
+    <div class="container">
+        <h1>Search</h1>
+        <hr>
+
+        <div id="message-box" class="alert alert-warning d-none">
+            The shop is currently closed.
+        </div>
+
+        <nav id ="pagination" class="d-none" aria-label="Animal List Navigation">
+            <ul class="pagination"></ul>
+        </nav>
+
+        <div id="card-display" class="row g-3"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>
+            </div>
+            <div class="modal-body">
+              Are you sure?
+            </div>
+            <div class="modal-footer" id="confirmation">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+          <hr>
+          <p>© <span id="copyright"></span> Connor Smith, Inc</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/products/search.js" type="module"></script>
+</body>
+</html>

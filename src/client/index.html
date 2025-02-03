@@ -3,9 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lab</title>
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Home</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+    <!-- Header -->
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills fs-5">
+          <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="create.html" class="nav-link">Create</a></li>
+          <li class="nav-item"><a href="search.html" class="nav-link">Search</a></li>
+        </ul>
+    </header>
+      
+    <!-- Content -->
+    <div class="container">
+        <h1>Home</h1>
+        <hr>
+    </div>
+
+    <!-- Carousel -->
+    <div id="carouselExampleIndicators" class="carousel carousel-dark slide bg">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <i class="fa-solid fa-heart icon-element"></i>
+          </div>
+          <div class="carousel-item">
+            <i class="fa-solid fa-star icon-element"></i>
+          </div>
+          <div class="carousel-item">
+            <i class="fa-solid fa-droplet icon-element"></i>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <i class="fa-solid fa-arrow-right"></i>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <div class="container">
+          <!-- About the store -->
+           <br>
+          <h2 style="display: flex; justify-content: center;">Welcome</h2>
+          <br>
+          <p style="text-align: center;">
+            We sell the widest variety of items of any store! At the click of a button, you can add
+            your own items into our catalogue. With ease, you can edit, remove, and query through our extensive list of items.
+          </p>
+      </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+          <hr>
+          <p>© <span id="copyright"></span> Connor Smith, Inc</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/products/index.js"></script>
 </body>
 </html>

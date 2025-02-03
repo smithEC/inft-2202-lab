@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Create</title>
+</head>
+<body>
+    <!-- Header -->
+    <header class="d-flex justify-content-center py-3">
+        <ul class="nav nav-pills fs-5">
+          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="create.html" class="nav-link active" aria-current="page">Create</a></li>
+          <li class="nav-item"><a href="search.html" class="nav-link">Search</a></li>
+        </ul>
+      </header>
+      
+    <!-- Content -->
+    <div class="container">
+        <h1>Create</h1>
+        <hr>
+
+        <!-- Form -->
+        <div id="message-box" class="alert alert-danger d-none"></div>
+        <form id="product-form" novalidate>
+          <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" name="name">
+              <p class="text-danger d-none"></p>
+          </div>
+          <div class="mb-3">
+              <label for="price" class="form-label">Price</label>
+              <input type="text" class="form-control" id="price" name="price">
+              <p class="text-danger d-none"></p>
+          </div>
+          <div class="mb-3">
+              <label for="stock" class="form-label">Stock</label>
+              <input type="text" class="form-control" id="stock" name="stock">
+              <p class="text-danger d-none"></p>
+          </div>
+          <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <input type="text" class="form-control" id="description" name="description">
+              <p class="text-danger d-none"></p>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+          <hr>
+          <p>© <span id="copyright"></span> Connor Smith, Inc</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/products/create.js" type="module"></script>
+</body>
+</html>

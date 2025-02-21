@@ -102,6 +102,7 @@ function displayProducts(products) {
 }
 
 function createCard(name, description, price, stock, product) {
+    console.log(name);  
     const eleGrid = document.createElement("div");
     eleGrid.className = "col-md-6 col-lg-4 d-flex justify-content-center";
 

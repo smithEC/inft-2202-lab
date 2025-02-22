@@ -1,5 +1,14 @@
+/*
+    Name: Connor Smith
+    filename: create.js
+    Course: INFT 2202
+    Date: February 21, 2025
+    Description: This is the Product create script
+*/
+
 import Product from './Product.js';
-import ProductService from './product.mock.service.js';
+// import ProductService from './product.mock.service.js';
+import ProductService from './product.service.js';
 
 const url = new URL(window.location);
 
@@ -13,15 +22,20 @@ if (isEditMode)
 document.getElementById('product-form')
     .addEventListener('submit', submitProductForm);
 
-function setUpEditForms() {
+async function setUpEditForms() {
     const eleHeading = document.querySelector('h1');
     const eleButton = document.querySelector('button');
 
     eleHeading.textContent = "Edit Product"
-    eleButton.textContent = "Update Product"
+    eleButton.textContent = "Update Product "
+
+    const eleIcon = document.createElement('i');
+    eleIcon.id = 'submit-icon';
+    eleIcon.className = 'fa-solid fa-check';
+    eleButton.append(eleIcon);
 
     try {
-        const existingProduct = ProductService.findProduct(editID);
+        const existingProduct = await ProductService.findProduct(editID);
         const productForm = document.getElementById('product-form');
 
         productForm.name.value = existingProduct.name;
@@ -29,15 +43,21 @@ function setUpEditForms() {
         productForm.stock.value = existingProduct.stock;
         productForm.description.value = existingProduct.description;
     } catch (error) {
-        window.location = 'search.html';
+        //window.location = 'search.html';
         return;
     }
 }
 
 
-function submitProductForm(event) {
+async function submitProductForm(event) {
     event.preventDefault();
     const productForm = event.target;
+
+    const elesubmitIcon = document.getElementById('submit-icon');
+    console.log(elesubmitIcon);
+    elesubmitIcon.className = 'fa-solid fa-spinner fa-spin-pulse';
+    await ProductService.waitTho(500);
+    elesubmitIcon.className = 'fa-solid fa-check';
 
     const eleMessageBox = document.getElementById("message-box");
     const eleNameError = productForm.name.nextElementSibling;
@@ -52,14 +72,15 @@ function submitProductForm(event) {
             description: productForm.description.value
         };
 
-        const productObject = new Product(productParams);
+        const productObject = new Product(productParams.id, productParams.name, productParams.price, productParams.stock, productParams.description);
 
+        
         try {
             if (isEditMode) {
-                ProductService.updateProduct(productObject);
+                await ProductService.updateProduct(productObject);
             }
             else {
-                ProductService.createProduct(productObject);
+                await ProductService.createProduct(productObject);
             }
             window.location.href = 'search.html'
         }

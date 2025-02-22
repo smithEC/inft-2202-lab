@@ -1,7 +1,15 @@
-function Product(id = null, name, price, stock, description) {
+/*
+    Name: Connor Smith
+    filename: Product.js
+    Course: INFT 2202
+    Date: February 21, 2025
+    Description: This is the Product object script
+*/
+
+function Product(id = null, name, price, stock, description, owner = null) {
     this.id = id ?? crypto.randomUUID();
     
-    Object.assign(this, { name, price, stock, description });
+    Object.assign(this, { name, price, stock, description, owner });
 };
 
 Product.prototype.toString = function() {
@@ -15,6 +23,7 @@ Product.prototype.toJSON = function() {
         price: this.price,
         stock: this.stock,
         description: this.description,
+        owner: this.owner
     };
 };
 

@@ -1,3 +1,11 @@
+/*
+    Name: Connor Smith
+    filename: product.service.js
+    Course: INFT 2202
+    Date: February 21, 2025
+    Description: This is the Product Mock Service script
+*/
+
 import Product from "./Product.js";
 
 class ProductService {
@@ -12,7 +20,7 @@ class ProductService {
         const last = first + perPage;
         
         const products = JSON.parse(localStorage.getItem('products'))
-            .map(productParams => new Product(productParams.id, productParams.name, productParams.price, productParams.stock, productParams.description))
+            .map(p => new Product(p.id, p.name, p.price, p.stock, p.description))
             .slice(first, last);
         console.log(products);
         return products;
@@ -20,7 +28,7 @@ class ProductService {
 
     getAllProducts() {
         return JSON.parse(localStorage.getItem('products'))
-            .map(product => new Product(product));
+            .map(p => new Product(p.id, p.name, p.price, p.stock, p.description));
     }
 
     createProduct(productObject) {

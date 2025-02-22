@@ -2,7 +2,7 @@
     Name: Connor Smith
     filename: app.js
     Course: INFT 2202
-    Date: February 2, 2025
+    Date: February 21, 2025
     Description: This is my general application script.  Functions that are required on every page should live here.
 */
 

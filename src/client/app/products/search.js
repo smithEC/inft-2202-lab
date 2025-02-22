@@ -1,4 +1,16 @@
-import ProductService from './product.mock.service.js';
+/*
+    Name: Connor Smith
+    filename: search.js
+    Course: INFT 2202
+    Date: February 21, 2025
+    Description: This is the Product search script
+*/
+
+// import ProductService from './product.mock.service.js';
+import productService from "./product.service.js";
+import ProductService from "./product.service.js";
+
+const myID = 100931463;
 
 const url = new URL(window.location);
 const searchedParams = url.searchParams;
@@ -8,15 +20,14 @@ const perPage = parseInt(searchedParams.get('perPage') ?? 6);
 const eleMessageBox = document.getElementById('message-box');
 const eleCardDisplay = document.getElementById('card-display');
 
-const records = ProductService.listProducts(page, perPage);
+const response = await ProductService.listProducts(page, perPage);
 
-toggleVisibility(records);
+//await productService.waitTho(1000);
+toggleVisibility(response);
 
 function drawPaginationLinks(elePaginationContainer, currentPage, totalPages) {
     const elePaginationItems = elePaginationContainer.querySelector('ul.pagination');
     elePaginationItems.replaceChildren();
-
-    console.log(totalPages);
 
     if (totalPages > 1) {
         elePaginationContainer.classList.remove('d-none');
@@ -76,33 +87,55 @@ function drawPaginationLinks(elePaginationContainer, currentPage, totalPages) {
 
     eleNextItem.append(eleNextLink);
     elePaginationItems.append(eleNextItem);  
+
+    const elePage3 = document.getElementById('button-3');
+    const elePage6 = document.getElementById('button-6');
+    const elePage9 = document.getElementById('button-9');
+    elePage3.addEventListener('click', updatePageCount(elePage3.textContent))
+    elePage6.addEventListener('click', updatePageCount(elePage6.textContent))
+    elePage9.addEventListener('click', updatePageCount(elePage9.textContent))
+
 }
 
-function toggleVisibility(products) {
-    if (!products.length) {
+function updatePageCount(pageCount) {
+    return event => {
+        const newURL = new URL(window.location.href);
+        const newSearchParams = new URLSearchParams(newURL.search);
+        newSearchParams.set('page', 1);
+        newSearchParams.set('perPage', pageCount);
+        
+        newURL.search = newSearchParams.toString();
+        window.location.href = newURL.toString();
+    }
+}
+
+function toggleVisibility(response) {
+    const eleSpinner = document.getElementById('spinner');
+    eleSpinner.classList.add('d-none'); 
+    const { pagination, records } = response;
+    
+    if (!records.length) {
         eleMessageBox.classList.remove('d-none');
     }
     else {
         eleMessageBox.classList.add('d-none');
-        displayProducts(products);
+        displayProducts(records);
 
         const elePaginationContainer = document.getElementById('pagination');
-        const totalPages = Math.ceil(ProductService.getProductCount() / perPage);
-        drawPaginationLinks(elePaginationContainer, page, totalPages);
-
-        console.log(perPage);
+        const eleDropdown = document.getElementById('dropdown');
+        eleDropdown.classList.remove('d-none');
+        drawPaginationLinks(elePaginationContainer, pagination.page, pagination.pages);
     }
 }
 
 function displayProducts(products) {
     for (const product of products) {
-        const eleCard = createCard(product.name, product.description, product.price, product.stock, product);
+        const eleCard = createCard(product);
         eleCardDisplay.append(eleCard);
     }
 }
 
-function createCard(name, description, price, stock, product) {
-    console.log(name);  
+function createCard(product) {
     const eleGrid = document.createElement("div");
     eleGrid.className = "col-md-6 col-lg-4 d-flex justify-content-center";
 
@@ -128,13 +161,13 @@ function createCard(name, description, price, stock, product) {
     // Create header
     const eleCardHeader = document.createElement('h5')
     eleCardHeader.className = 'card-title';
-    eleCardHeader.textContent = name;
+    eleCardHeader.textContent = product.name;
     eleCardBody1.append(eleCardHeader);
 
     // Create description
     const eleCardDescription = document.createElement('p');
     eleCardDescription.className = 'card-text';
-    eleCardDescription.textContent = description;
+    eleCardDescription.textContent = product.description;
     eleCardBody1.append(eleCardDescription);
 
     // Create list for product info
@@ -145,14 +178,26 @@ function createCard(name, description, price, stock, product) {
     // Create price info
     const eleCardPrice = document.createElement('li');
     eleCardPrice.className = 'list-group-item';
-    eleCardPrice.textContent = `$${price}`;
+    eleCardPrice.textContent = `$${product.price}`;
     eleCardList.append(eleCardPrice);
 
     // Create stock info
     const eleCardStock = document.createElement('li');
     eleCardStock.className = 'list-group-item';
-    eleCardStock.textContent = `${stock} in stock`;
+    eleCardStock.textContent = `${product.stock} in stock`;
     eleCardList.append(eleCardStock);
+
+    // Create Owner info
+    const eleOwnerStock = document.createElement('li');
+    eleOwnerStock.className = 'list-group-item';
+    eleOwnerStock.textContent = `Listed By: ${product.owner.name}`;
+    eleCardList.append(eleOwnerStock);
+
+    // Create Owner info
+    const eleDateStock = document.createElement('li');
+    eleDateStock.className = 'list-group-item';
+    eleDateStock.textContent = `Listed At: ${new Date(product.owner.createdAt).toDateString()}`;
+    eleCardList.append(eleDateStock);
 
     // Create card body2
     const eleCardBody2 = document.createElement('div');
@@ -171,37 +216,43 @@ function createCard(name, description, price, stock, product) {
     eleCartIcon.className = 'fa-solid fa-cart-shopping';
     eleCartButton.append(eleCartIcon);
 
-    // Create edit Button
-    const eleEditButton = document.createElement('a');
-    eleEditButton.className = 'btn btn-primary mx-2';
-    eleCardBody2.append(eleEditButton);
-    eleEditButton.setAttribute('href', `create.html?id=${product.id}`);
+    if (product.owner.bannerId === myID) {
+        // Create edit Button
+        const eleEditButton = document.createElement('a');
+        eleEditButton.className = 'btn btn-primary mx-2';
+        eleCardBody2.append(eleEditButton);
+        eleEditButton.setAttribute('href', `create.html?id=${product.id}`);
 
-    // Create cart Icon
-    const eleEditIcon = document.createElement('i');
-    eleEditIcon.className = 'fa-solid fa-edit';
-    eleEditButton.append(eleEditIcon);
+        // Create cart Icon
+        const eleEditIcon = document.createElement('i');
+        eleEditIcon.className = 'fa-solid fa-edit';
+        eleEditButton.append(eleEditIcon);
 
-    // Create trash Button
-    const eleTrashButton = document.createElement('button');
-    eleTrashButton.className = 'btn btn-danger';
-    eleCardBody2.append(eleTrashButton);
+        // Create trash Button
+        const eleTrashButton = document.createElement('button');
+        eleTrashButton.className = 'btn btn-danger';
+        eleCardBody2.append(eleTrashButton);
 
-    // Create trash Icon
-    const eleTrashIcon = document.createElement('i');
-    eleTrashIcon.className = 'fa-solid fa-trash';
-    eleTrashButton.append(eleTrashIcon);
-    eleTrashButton.addEventListener('click', onDeleteClick(product));
+        // Create trash Icon
+        const eleTrashIcon = document.createElement('i');
+        eleTrashIcon.className = 'fa-solid fa-trash';
+        eleTrashButton.append(eleTrashIcon);
+        eleTrashButton.addEventListener('click', onDeleteClick(product));
+    }
 
     return eleGrid;
 }
 
 function onConfirm(product) {
-    return event => {
+    return async event => {
+        const eleDeleteSpinner = document.getElementById('delete-spinner');
         try {
-            ProductService.deleteProduct(product);
+            eleDeleteSpinner.classList.remove('d-none');
+            await ProductService.waitTho(1000);
+            await ProductService.deleteProduct(product);
             window.location = 'search.html';
         } catch (error) {
+            eleDeleteSpinner.classList.add('d-none');
             eleMessageBox.classList.remove('d-none');
             eleMessageBox.textContent = error.message;
         }

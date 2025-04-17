@@ -1,27 +1,10 @@
-import { Schema, model } from "mongoose";
+import mongoose from 'mongoose';
 
-const fields = {
-    name:{
-        type: String,
-        required: true
-    },
-    price:{
-        type: String,
-        required: true
-    },
-    stock:{
-        type: Number,
-        required: true
-    },
-    description:{
-        type: String,
-        required: true
-    }
-}
+const productSchema = new mongoose.Schema({
+  name: String,
+  price: Number,
+  stock: Number,
+  description: String
+}, { timestamps: false });
 
-const options = {
-    timestamp: true
-}
-
-const schema = new Schema(fields,options);
-export default model('Product',schema);
+export default mongoose.model('Product', productSchema);

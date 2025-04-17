@@ -1,4 +1,3 @@
-
 import Product from "../models/Product.js";
 
 class ProductService{
@@ -24,7 +23,7 @@ class ProductService{
     }
 
     async deleteProduct(productId) {
-        const deletedProduct = await Product.findOneAndDelete({ _id: productId });
+        const deletedProduct = await Product.findOneAndDelete({_id: productId});
         return deletedProduct;
     }
     async searchProducts(page = 1, perPage = 3){
@@ -47,7 +46,7 @@ class ProductService{
             skip: (page - 1) * perPage,
             limit: perPage,
             sort:{
-                createAt:-1
+                _id: -1
             }
         };
 

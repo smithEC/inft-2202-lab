@@ -1,3 +1,15 @@
-# inft-2202-lab
+# 🚀 Welcome to your new awesome project!
 
-My name is Connor Smith and I've been programming since I was a kid. I love OOP and intend to be a software developer. I am hoping to learn loads about Javascript and client-side scripting.
+This project has been created using **webpack-cli**, you can now run
+
+```
+npm run build
+```
+
+or
+
+```
+yarn build
+```
+
+to bundle your application

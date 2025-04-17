@@ -1,13 +1,19 @@
 {
-  "name": "inft-2202-lab",
+  "name": "my-webpack-project",
   "version": "1.0.0",
-  "description": "Lab project for inft-2202",
+  "description": "My webpack project",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx nodemon src/server/app.js",
-    "dev": "nodemon src/server/app.js"
+    "dev": "nodemon src/server/app.js",
+    "build": "webpack --mode=production --node-env=production",
+    "bs": "npm run build && npm run start",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production --node-env=production",
+    "watch": "webpack --watch",
+    "serve": "webpack serve"
   },
   "repository": {
     "type": "git",
@@ -22,12 +28,30 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "bootstrap": "^5.3.3",
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
     "express-validator": "^7.2.1",
     "mongodb": "^6.15.0",
+    "mongoose": "^8.13.2",
+    "navigo": "^8.11.1",
     "winston": "^3.17.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "@webpack-cli/generators": "^3.0.7",
+    "babel-loader": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "ejs-compiled-loader": "^3.1.0",
+    "html-webpack-plugin": "^5.6.3",
+    "mini-css-extract-plugin": "^2.9.2",
+    "nodemon": "^3.1.9",
+    "sass": "^1.86.3",
+    "sass-loader": "^16.0.5",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.99.5",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.2.1",
+    "workbox-webpack-plugin": "^7.3.0"
   }
 }

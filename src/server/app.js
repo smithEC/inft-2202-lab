@@ -23,10 +23,10 @@ app.use(express.static('dist'));
 
 app.use('/node_modules', express.static(`${import.meta.dirname}/../../node_modules`));
 
-app.use('/api', productRouter);
+app.use('/', productRouter);
 
 app.use('*',(err,req,res,next)=>{
-    res.sendFile(path.resolve(import.meta.dirname + '/../..dist/index.html'));
+    res.sendFile(path.resolve(import.meta.dirname, '../../dist/index.html'));
 });
 
 app.use((err,req,res,next)=>{
@@ -43,4 +43,3 @@ console.log('connected to database')
 app.listen(PORT, ()=>{
     console.log(`server is running on port ${PORT}`);
 });
-

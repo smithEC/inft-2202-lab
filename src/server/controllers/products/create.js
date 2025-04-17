@@ -1,19 +1,12 @@
-
 import {checkSchema} from "express-validator";
-import ProdcutService from "../../service/ProdcutService.js";
+//import ProdcutService from "../../service/ProdcutService.js";
+import ProductService from "../../service/ProductService.js";
 
 const rules = checkSchema({
-    name:{
+    name: {
         notEmpty: true,
-        errorMessage:`"name" is required`,
-        in: 'body',
-        customSanitizer: {
-            options:async (value)=>{
-                if(value =='Connor'){
-                    return value += 'is the best'
-                }
-            }
-        }
+        errorMessage: `"name" is required`,
+        in: 'body'
     },
     price:{
         notEmpty: {
@@ -40,8 +33,6 @@ const rules = checkSchema({
         in: 'body'
     },
 });
-
-
 
 const handle = async (req, res, next) => {
     console.log('Incoming POST Request:', req.body); 

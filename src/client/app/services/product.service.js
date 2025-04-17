@@ -6,21 +6,21 @@
     Description: This is the Product Service script
 */
 
-import Product from "./Product.js";
+import Product from "../models/Product.js";
 
 class ProductService {
     constructor() {
-        this.host = 'https://inft2202.opentech.durhamcollege.org';
-        this.apikey = '4f3937b2-5cea-45ac-bac8-d0509585c07c';
+        this.host = 'http://localhost:3000';
+        //this.apikey = '4f3937b2-5cea-45ac-bac8-d0509585c07c';
     }
 
     async listProducts(page = 1, perPage = 6) {
-        const url = new URL('api/products', this.host);
+        const url = new URL('/products', this.host);
         url.search = new URLSearchParams({ page, perPage });
 
         const headers = new Headers({
-            'content-type': 'application/json',
-            'apikey': this.apikey
+            'content-type': 'application/json' 
+            //'apikey': this.apikey
         });
 
         const options = {
@@ -37,7 +37,7 @@ class ProductService {
             console.log(records);
             return {
                 pagination,
-                records: records.map(p => new Product(p.productId, p.name, p.price, p.stock, p.description, p.owner))
+                records: records.map(p => new Product(p._id, p.name, p.price, p.stock, p.description))
             }
         }
         catch (error) {
@@ -47,14 +47,14 @@ class ProductService {
     }
 
     async getAllProducts() {
-        const url = new URL('/api/products', this.host);
+        const url = new URL('/products', this.host);
         const page = 1;
         const perPage = Infinity;
         url.search = new URLSearchParams({ page, perPage });
         
         const headers = new Headers({
-            'content-type': 'application/json',
-            'apikey': this.apikey
+            'content-type': 'application/json'
+            //'apikey': this.apikey
         });
 
         const options = {
@@ -69,7 +69,7 @@ class ProductService {
 
             return {
                 pagination,
-                records: records.map(p => new Product(p.productId, p.name, p.price, p.stock, p.description))
+                records: records.map(p => new Product(p._id, p.name, p.price, p.stock, p.description))
             }
         }
         catch (error) {
@@ -79,11 +79,11 @@ class ProductService {
     }
 
     async createProduct(productObject) {
-        const url = new URL('/api/products', this.host);
+        const url = new URL('/products', this.host);
 
         const headers = new Headers({
-            'Content-Type': 'application/json',
-            'apikey': this.apikey
+            'Content-Type': 'application/json'
+            //'apikey': this.apikey
         });
 
         const options = {
@@ -96,7 +96,7 @@ class ProductService {
             const response = await fetch(url, options);
 
             const createdProduct = await response.json();
-            return new Product(createdProduct.productId, createdProduct.name, createdProduct.price, createdProduct.stock, createdProduct.description);
+            return new Product(createdProduct._id, createdProduct.name, createdProduct.price, createdProduct.stock, createdProduct.description);
         } catch (error) {
             console.error("Ahhh", error);
             throw error;
@@ -108,11 +108,11 @@ class ProductService {
             throw new Error("Product ID is required");
         }
     
-        const url = new URL(`/api/products/${productID}`, this.host);
+        const url = new URL(`/products/${productID}`, this.host);
     
         const headers = new Headers({
-            'Content-Type': 'application/json',
-            'apikey': this.apikey
+            'Content-Type': 'application/json'
+            //'apikey': this.apikey
         });
     
         const options = {
@@ -124,7 +124,7 @@ class ProductService {
             const response = await fetch(url, options);
     
             const newProduct = await response.json();
-            return new Product(newProduct.productId, newProduct.name, newProduct.price, newProduct.stock, newProduct.description);
+            return new Product(newProduct._id, newProduct.name, newProduct.price, newProduct.stock, newProduct.description);
         } catch (error) {
             console.error("Ahhh", error);
             throw error;
@@ -132,11 +132,11 @@ class ProductService {
     }
 
     async updateProduct(productObject) {
-        const url = new URL(`/api/products/${productObject.id}`, this.host);
+        const url = new URL(`/products/${productObject._id}`, this.host);
 
         const headers = new Headers({
-            'Content-Type': 'application/json',
-            'apikey': this.apikey
+            'Content-Type': 'application/json'
+            //'apikey': this.apikey
         });
 
         const options = {
@@ -149,7 +149,7 @@ class ProductService {
             const response = await fetch(url, options);
 
             const updatedProduct = await response.json();
-            return new Product(updatedProduct.productId, updatedProduct.name, updatedProduct.price, updatedProduct.stock, updatedProduct.description);
+            return new Product(updatedProduct._id, updatedProduct.name, updatedProduct.price, updatedProduct.stock, updatedProduct.description);
         } catch (error) {
             console.error("Ahhh", error);
             throw error;
@@ -157,11 +157,11 @@ class ProductService {
     }
 
     async deleteProduct(productObject) {
-        const url = new URL(`/api/products/${productObject.id}`, this.host);
+        const url = new URL(`/products/${productObject._id}`, this.host);
 
         const headers = new Headers({
-            'Content-Type': 'application/json',
-            'apikey': this.apikey
+            'Content-Type': 'application/json'
+            //'apikey': this.apikey
         });
 
         const options = {

@@ -8,9 +8,6 @@ import ProductDeleteController from "../controllers/products/delete.js";
 import ProductSearchController from "../controllers/products/search.js";
 const router = express.Router();
 
-export default router;
-
-
 router.get('/products',ProductSearchController.handle);
 
 router.get('/products/:productId',ProductRetrieveController.handle);
@@ -20,3 +17,5 @@ router.post('/products',CheckValidation(ProductCreateController.rules), ProductC
 router.put('/products/:productId',CheckValidation(ProductUpdateController.rules), ProductUpdateController.handle);
 
 router.delete('/products/:productId',CheckValidation(ProductDeleteController.rules), ProductDeleteController.handle);
+
+export default router;
